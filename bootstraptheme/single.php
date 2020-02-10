@@ -1,37 +1,36 @@
-<?php /* Template Name: Team Member Template */ ?>
+<?php
+/**
+ * The template for displaying all single posts
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
+ *
+ * @package Testing
+ */
 
-<?php get_header(); ?>
-<div class="col-sm-8 blog-main">
-    <?php
-        $args = array('post_type' => 'team_members');
-        $query = new WP_Query($args);
-        // var_dump(json_encode($query));
-        $i = 1;
-        while ( $query->have_posts() ) : $query->the_post();
-        $id         = $query->post->ID;
-        $position   = get_post_meta($id, 'member_position', true);
-        $email      = get_post_meta($id, 'member_email', true);
-        $website    = get_post_meta($id, 'member_website', true); 
-        $image      = get_post_meta($id, 'member_image', true);
-        // var_dump($position);die;
-    ?>
-    <div class="grid-item">
-        <?php if($image != null) 
-        {
-        ?>
-            <p><img href="<?php echo $image; ?>" alt="Photo Profile"/></p>
-        <?php 
-        }
-        ?>
-        <p><?php echo the_title(); ?></p>
-        <p><?php echo $position; ?></p>
-        <p><?php echo $email ?></p>
-        <p><?php echo $website ?></p>
-    </div>
-    <?php endwhile; ?>
-    
-</div>
+get_header();
+?>
 
-<?php get_sidebar(); ?>
+    <div class="col-sm-8 blog-main">
 
-<?php get_footer(); ?>
+	<?php 
+		if ( have_posts() ) { 
+			while ( have_posts() ) : the_post();
+		?>
+		<div class="blog-post">
+			<h2 class="blog-post-title"><?php the_title(); ?></h2>
+			<p class="blog-post-meta"><?php the_date(); ?> by <?php the_author(); ?></p>
+			<?php the_content(); ?>
+		</div><!-- /.blog-post -->
+		<?php
+			if ( comments_open() || get_comments_number() ) :
+				comments_template();
+			endif;
+			endwhile;
+		} 
+		?>
+
+	</div><!-- #primary -->
+
+<?php
+get_sidebar();
+get_footer();

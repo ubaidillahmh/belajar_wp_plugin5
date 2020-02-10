@@ -5,7 +5,7 @@ if(of_get_option('availability') == 'maintenance')
     // echo home_url('404', 404);
     wp_redirect( 404 ); exit;
 }
-get_header('child3'); ?>
+get_header(); ?>
 <div class="col-sm-8 blog-main">
     
     <?php
@@ -34,8 +34,6 @@ get_header('child3'); ?>
             <li><?php previous_posts_link('Next'); ?></li>
         </ul>
     </nav>
-
-    <?php include('member.php'); ?>
     
 </div><!-- /.blog-main -->
 

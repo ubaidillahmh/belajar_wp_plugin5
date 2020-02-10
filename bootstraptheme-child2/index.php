@@ -1,4 +1,4 @@
-<?php get_header('child2'); ?>
+<?php get_header(); ?>
 <div class="col-sm-8 blog-main">
     
     <?php
@@ -33,8 +33,6 @@
             <li><?php previous_posts_link('Next'); ?></li>
         </ul>
     </nav>
-
-    <?php include('member.php'); ?>
     
 </div><!-- /.blog-main -->
 
